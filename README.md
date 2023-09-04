@@ -1,6 +1,6 @@
 # AI Grading Assistant for Canvas Discussions 🎓📝
 
-This application is designed to be the *best friend* of a grading assistant for Canvas discussions. It uses advanced AI models to grade student responses based on a provided rubric, and also provides developmental feedback to students. The application is built using Next.js and the Vercel AI SDK, with added Azure Authentication.
+This application is designed to be the **best friend** of a grading assistant for Canvas discussions. It uses advanced AI models to grade student responses based on a provided rubric, and also provides developmental feedback to students. The application is built using Next.js and the Vercel AI SDK, with added Azure Authentication.
 
 ## Features 🚀
 
