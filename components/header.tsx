@@ -37,13 +37,19 @@ export async function Header() {
           </Sidebar>
         ) : (
           <Link href="/" target="_blank" rel="nofollow">
-            <IconNextChat className="w-6 h-6 mr-2 dark:hidden" inverted />
-            <IconNextChat className="hidden w-6 h-6 mr-2 dark:block" />
+            <IconNextChat className="w-8 h-8 mr-2 dark:hidden" inverted />
+            <IconNextChat className="hidden w-8 h-8 mr-2 dark:block" />
           </Link>
         )}
         
       </div>
       <div className="flex items-center justify-end space-x-2">
+      {session?.user ? (
+        <Link href="/" target="_blank" rel="nofollow">
+        <IconNextChat className="w-12 h-12 mr-2 dark:hidden" inverted />
+        <IconNextChat className="hidden w-12 h-12 mr-2 dark:block" />
+      </Link>
+      ):(<></>)}
         <div className="flex items-center">
           <IconSeparator className="w-6 h-6 text-muted-foreground/50" />
           {session?.user ? (
