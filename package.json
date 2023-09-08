@@ -35,6 +35,7 @@
     "next": "13.4.19",
     "next-auth": "0.0.0-manual.ffd05533",
     "next-themes": "^0.2.1",
+    "nodejs": "^14.17.6",
     "openai-edge": "^0.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
