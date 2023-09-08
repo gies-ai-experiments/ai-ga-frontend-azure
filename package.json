@@ -2,6 +2,7 @@
   "name": "ai-ga-frontend-azure",
   "version": "0.0.2",
   "private": true,
+  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
