@@ -4,7 +4,7 @@
   "private": true,
   "workspaces": [
     "azuredeployment/*"
-  ]
+  ],
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
