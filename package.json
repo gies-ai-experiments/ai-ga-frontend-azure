@@ -2,9 +2,6 @@
   "name": "ai-ga-frontend-azure",
   "version": "0.0.2",
   "private": true,
-  "workspaces": [
-    "azuredeployment/*"
-  ],
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
