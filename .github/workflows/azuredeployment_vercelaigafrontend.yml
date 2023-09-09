@@ -15,11 +15,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - id: Cache@2
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Cache pnpm
+        uses: actions/cache@v2
         with:
-          key: 'pnpm | "$(Agent.OS)" | pnpm-lock.yaml'
-          path: $(pnpm_config_cache)
-        name: Cache pnpm
+          key: 'pnpm | "${{ runner.os }}" | pnpm-lock.yaml'
+          path: ${{ runner.workspace }}/.pnpm-store
+
+      - name: Cache .next/cache
+        uses: actions/cache@v2
+        with:
+          key: next | ${{ runner.os }} | pnpm-lock.yaml
+          path: ${{ github.workspace }}/.next/cache
+
+      - name: Setup pnpm
+        run: |
+          curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+          pnpm config set store-dir ${{ runner.workspace }}/.pnpm-store
+
+      - name: Install and build
+        run: |
+          pnpm install
+          pnpm run build
+
+      - name: Archive files
+        run: zip -r release.zip . -i ./build/*
+      
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: node-app
+          path: ./release.zip
 
 
       - uses: actions/checkout@v2
