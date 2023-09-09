@@ -15,36 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-            
-      - name: Cache pnpm
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.pnpm_config_cache }}
-          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          displayName: Cache pnpm
-  
-      - name: Cache .next/cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace }}/.next/cache
-          key: next-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          displayName: "Cache .next/cache"
-  
-      - name: Setup pnpm
-        run: |
-          curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-          pnpm config set store-dir ${{ env.pnpm_config_cache }}
-          displayName: "Setup pnpm"
-  
-      - name: Install and build
-        run: |
-          pnpm install
-          pnpm run build
-          displayName: "pnpm install and build"
-      - uses: actions/checkout@v3
+    
+      - uses: actions/checkout@v2
           
       - name: Set up Node.js version
         uses: actions/setup-node@v2
@@ -59,6 +31,7 @@ jobs:
       - name: npm install, build, and test
         run: | 
           npm install -g pnpm
+          npm run postinstall
           pnpm install --no-frozen-lockfile
           pnpm run build
       
