@@ -2,6 +2,9 @@
   "name": "ai-ga-frontend-azure",
   "version": "0.0.2",
   "private": true,
+  "workspaces": [
+    "azuredeployment/*"
+  ]
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -15,7 +18,7 @@
     "format:check": "prettier --check \"{app,lib,components}**/*.{ts,tsx,mdx}\" --cache"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=14.0.0"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",
