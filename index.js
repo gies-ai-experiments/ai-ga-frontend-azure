@@ -1,17 +1,7 @@
-const { createServer } = require("http");
-#const express = require('express') (Only if you app uses express)
-const next = require("next");
+if (typeof Proxy !== 'object' || typeof WeakMap !== 'function') {
+  throw new Error ('AppJS requires Node is run with the --harmony command line flag');
+}
 
-const port = process.env.PORT || 3000;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
+var App = require('./app');
 
-app.prepare().then(() => {
-  createServer((req, res) => {
-    handle(req, res);
-  }).listen(port, (err) => {
-    if (err) throw err;
-    console.log(`> Ready on <http://localhost>:${port}`);
-  });
-});
+module.exports = new App;
