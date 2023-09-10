@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "private": true,
   "main": "index.js",
+  "engines": {
+    "node": "18.17.1"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,9 +17,6 @@
     "format:write": "prettier --write \"{app,lib,components}/**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"{app,lib,components}**/*.{ts,tsx,mdx}\" --cache",
     "postinstall": "npm install -g pnpm@8.6.3"
-  },
-  "engines": {
-    "node": "18.17.1"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",
