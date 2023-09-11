@@ -2,7 +2,7 @@
   "name": "ai-ga-frontend-azure",
   "version": "0.0.2",
   "private": true,
-  "main": "index.js",
+  "main": "app.js",
   "engines": {
     "node": "18.16.1"
   },
