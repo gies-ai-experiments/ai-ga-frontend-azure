@@ -88,6 +88,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      - name: 'Install pnpm in Azure'
+        run: |
+          echo "Installing pnpm..."
+          /bin/bash -c "$(curl -fsSL https://get.pnpm.io/install.sh)"
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -97,4 +101,3 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04003FDCA94B4BE3928B4850814F6E61 }}
           package: .
-          preDeployCommand: 'npm install -g pnpm'  # Add this line
