@@ -14,8 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      
       - uses: pnpm/action-setup@v2
-      - name: Install pnpm
+        name: Install pnpm
         with:
           version: 7
           run_install: false
