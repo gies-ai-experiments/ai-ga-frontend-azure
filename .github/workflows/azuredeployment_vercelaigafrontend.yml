@@ -8,43 +8,42 @@ on:
     branches:
       - azuredeployment
   workflow_dispatch:
-  
-          
+
 jobs:
   build:
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        steps:
-          - uses: pnpm/action-setup@v2
-          - name: Install pnpm
-            with:
-              version: 7
-              run_install: false
-    
-          - name: Get pnpm store directory
-            shell: bash
-            run: |
-              echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-    
-          - uses: actions/cache@v3
-            name: Setup pnpm cache
-            with:
-              path: ${{ env.STORE_PATH }}
-              key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-              restore-keys: |
-                ${{ runner.os }}-pnpm-store-
-    
-          - name: Install dependencies
-            run: pnpm install
-  
-          - name: Archive files
-            run: zip -r release.zip . -i ./build/*
-          
-          - name: Upload artifact for deployment job
-            uses: actions/upload-artifact@v2
-            with:
-              name: node-app
-              path: ./release.zip
+    steps:
+      - uses: pnpm/action-setup@v2
+      - name: Install pnpm
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Archive files
+        run: zip -r release.zip . -i ./build/*
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: node-app
+          path: ./release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,6 +57,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+
       - name: 'Install pnpm in Azure'
         run: |
           echo "Installing pnpm..."
