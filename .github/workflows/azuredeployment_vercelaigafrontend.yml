@@ -16,18 +16,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-          
-      - name: Set up Node.js version
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.x'
-          cache: 'pnpm'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.1
         with:
           version: "8.x"
-          
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+          cache: 'pnpm'
+        
       - name: pnpm install, and build
         run: | 
           pnpm install --no-frozen-lockfile
