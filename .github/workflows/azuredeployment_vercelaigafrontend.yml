@@ -26,7 +26,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18.x'
-          cache: 'pnpm'
         
       - name: pnpm install, and build
         run: | 
@@ -61,7 +60,7 @@ jobs:
       with:
         node-version: '18.x'
         registry-url: 'https://registry.npmjs.org/'
-        cache: 'pnpm'
+        
     - name: 'Deploy to Azure Web App'
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
