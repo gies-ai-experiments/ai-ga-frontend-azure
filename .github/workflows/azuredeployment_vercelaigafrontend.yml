@@ -36,18 +36,6 @@ jobs:
       - name: Zip artifact for deployment
         run: zip -r release.zip . -i ./build/*
       
-      - name: Cache pnpm
-        uses: actions/cache@v2
-        with:
-          key: 'pnpm | "${{ runner.os }}" | pnpm-lock.yaml'
-          path: ${{ runner.workspace }}/.pnpm-store
-
-      - name: Cache .next/cache
-        uses: actions/cache@v2
-        with:
-          key: next | ${{ runner.os }} | pnpm-lock.yaml
-          path: ${{ github.workspace }}/.next/cache
-      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
