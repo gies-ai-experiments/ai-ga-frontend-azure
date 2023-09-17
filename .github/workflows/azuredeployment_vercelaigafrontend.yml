@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
       - uses: actions/checkout@v2
@@ -60,7 +60,9 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    
+    permissions:
+      contents: write
+      packages: write
     steps:
     - uses: actions/checkout@v3
     - name: Install pnpm
