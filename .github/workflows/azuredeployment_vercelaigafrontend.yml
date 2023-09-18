@@ -78,8 +78,9 @@ jobs:
       with:
         node-version: '18.x'
         registry-url: 'https://registry.npmjs.org/'
+    
     - name: Download node_modules.tar.gz
-      run: wget https://vercelaigafrontend.scm.azurewebsites.net/wwwroot/node_modules.tar.gz
+      run: wget --user=vercelaigafrontend\$vercelaigafrontend --password=8BhqWalXDoj54rxDhv3vgDoiGXdTDRrH7Tn46fqfKnKTrBGwcwd4egZtvs9F https://vercelaigafrontend.scm.azurewebsites.net/wwwroot/node_modules.tar.gz
   
     - name: Extract node_modules and delete tar.gz
       run: |
