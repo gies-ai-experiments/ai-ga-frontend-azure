@@ -81,12 +81,10 @@ jobs:
         node-version: '18.x'
         registry-url: 'https://registry.npmjs.org/'
 
-    - name: Compress node_modules directory
-      run: tar -czf node_modules.tar.gz node_modules
-  
-    - name: Extract node_modules and delete tar.gz
+    - name: Run commands in wwwroot
       run: |
-        tar -xzf ./node_modules.tar.gz
+        cd wwwroot
+        tar -xzf node_modules.tar.gz
         rm node_modules.tar.gz
         
     - name: 'Deploy to Azure Web App'
