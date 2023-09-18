@@ -33,9 +33,6 @@ jobs:
         run: | 
           pnpm install --no-frozen-lockfile
           pnpm run build
-
-      - name: Compress node_modules directory
-        run: tar -czf node_modules.tar.gz node_modules
   
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -83,12 +80,10 @@ jobs:
       with:
         node-version: '18.x'
         registry-url: 'https://registry.npmjs.org/'
-    
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-        registry-url: 'https://registry.npmjs.org/'
-    
+
+    - name: Compress node_modules directory
+      run: tar -czf node_modules.tar.gz node_modules
+  
     - name: Extract node_modules and delete tar.gz
       run: |
         tar -xzf ./node_modules.tar.gz
