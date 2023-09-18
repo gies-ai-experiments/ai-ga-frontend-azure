@@ -81,10 +81,8 @@ jobs:
         node-version: '18.x'
         registry-url: 'https://registry.npmjs.org/'
 
-    - name: Change directory to root
-      run: cd ${{ github.workspace }}
-
     - name: Extract node_modules and delete tar.gz
+      working-directory: ${{ github.workspace }}
       run: |
         tar -xzf node_modules.tar.gz
         rm node_modules.tar.gz
