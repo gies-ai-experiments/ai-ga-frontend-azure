@@ -34,6 +34,12 @@ jobs:
           pnpm install --no-frozen-lockfile
           pnpm run build
       
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path | tr -d '\n')" >> $GITHUB_OUTPUT
+          
       - name: Cache pnpm store
         uses: actions/cache@v2
         with:
@@ -78,9 +84,6 @@ jobs:
       with:
         node-version: '18.x'
         registry-url: 'https://registry.npmjs.org/'
-    
-    - name: Download node_modules.tar.gz
-      run: wget --user=${{ secrets.USERNAME }} --password=${{ secrets.PASSWORD }} https://vercelaigafrontend.scm.azurewebsites.net/wwwroot/node_modules.tar.gz
     
     - name: Extract node_modules and delete tar.gz
       run: |
