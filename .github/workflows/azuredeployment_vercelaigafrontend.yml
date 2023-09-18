@@ -87,7 +87,7 @@ jobs:
     
     - name: Extract node_modules and delete tar.gz
       run: |
-        tar -xzf node_modules.tar.gz
+        tar -xzf ./node_modules.tar.gz
         rm node_modules.tar.gz
         
     - name: 'Deploy to Azure Web App'
