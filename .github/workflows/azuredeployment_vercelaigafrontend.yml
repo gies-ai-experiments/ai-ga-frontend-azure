@@ -83,4 +83,4 @@ jobs:
           app-name: 'vercelaigafrontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04003FDCA94B4BE3928B4850814F6E61 }}
-          package: release.zip
+          package: .
