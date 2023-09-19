@@ -19,17 +19,17 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.x'
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
+        uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
         with:
           version: 8
-          run_install: false
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
 
       - name: Get pnpm store directory
         shell: bash
@@ -83,4 +83,4 @@ jobs:
           app-name: 'vercelaigafrontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04003FDCA94B4BE3928B4850814F6E61 }}
-          package: .
+          package: release.zip
