@@ -49,14 +49,18 @@ jobs:
           pnpm install --no-frozen-lockfile
           pnpm run build
       
-      - name: Zip artifact for deployment
-        run: cd build && zip -r ../release.zip .
+      - name: Archive Release
+        uses: thedoctor0/zip-release@v0.3.0
+        with:
+          filename: 'dist.zip'
+          path: 'dist/'
+      - run: mv dist.zip dist/
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./release.zip
+          path: 'dist/'
 
 
   deploy:
@@ -72,9 +76,14 @@ jobs:
       packages: write
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: node-app
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}
 
       - name: 'Deploy to Azure WebApp'
         id: deploy-to-webapp 
