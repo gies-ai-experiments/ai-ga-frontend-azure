@@ -50,7 +50,9 @@ jobs:
           pnpm run build
 
       - name: List directory contents
-        run: ls -R
+        run: |
+          ls -R
+          mkdir dist
       
       - name: Archive Release
         uses: thedoctor0/zip-release@v0.3.0
