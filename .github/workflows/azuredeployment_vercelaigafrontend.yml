@@ -48,6 +48,9 @@ jobs:
         run: | 
           pnpm install --no-frozen-lockfile
           pnpm run build
+
+      - name: List directory contents
+        run: ls -R
       
       - name: Archive Release
         uses: thedoctor0/zip-release@v0.3.0
