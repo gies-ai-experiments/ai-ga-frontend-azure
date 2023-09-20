@@ -1,14 +1,13 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - vercelaigafrontend
+name: Build and deploy Node.js app to Azure Web App - vercel-aigafrontend-azure-v02
 
 on:
   push:
     branches:
-      - azuredeployment
-  workflow_dispatch:
-  
+      - vercel-frontend-azure-v02
+  workflow_dispatch:  
           
 jobs:
   build:
@@ -90,11 +89,11 @@ jobs:
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
 
-      - name: 'Deploy to Azure WebApp'
-        id: deploy-to-webapp 
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'vercelaigafrontend'
+          app-name: 'vercel-aigafrontend-azure-v02'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04003FDCA94B4BE3928B4850814F6E61 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C86304C217124DF09C405822A2D7E0AC }}
           package: .
