@@ -50,7 +50,9 @@ jobs:
           pnpm run build
       
       - name: Zip artifact for deployment
-        run: zip -r release.zip . -i ./build/*
+        run: |
+          cd build
+          zip -r ../release.zip .
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
