@@ -49,15 +49,18 @@ jobs:
           pnpm install --no-frozen-lockfile
           pnpm run build
 
-      - name: Zip artifact for deployment
-        run: zip -r release.zip . -i ./build/*
+      - name: Prepare deployment package
+        run: |
+          mkdir deploy
+          cp -r node_modules package.json .next deploy/
+          cd deploy
+          zip -r my-nextjs-app.zip *
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./release.zip
-
+          path: ./deploy/my-nextjs-app.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -88,4 +91,4 @@ jobs:
           app-name: 'vercelaigafrontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04003FDCA94B4BE3928B4850814F6E61 }}
-          package: .
+          package: ./deploy/my-nextjs-app.zip
