@@ -49,23 +49,14 @@ jobs:
           pnpm install --no-frozen-lockfile
           pnpm run build
 
-      - name: List directory contents
-        run: |
-          ls -R
-          mkdir dist
-      
-      - name: Archive Release
-        uses: thedoctor0/zip-release@v0.3.0
-        with:
-          filename: 'dist.zip'
-          path: 'dist/'
-      - run: mv dist.zip dist/
-      
+      - name: Zip artifact for deployment
+        run: zip release.zip ./build/* -r
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: 'dist/'
+          path: release.zip
 
 
   deploy:
