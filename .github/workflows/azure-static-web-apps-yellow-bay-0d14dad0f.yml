@@ -18,13 +18,16 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      
-      - name: Setup pnpm
+      - uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
+        with:
+          version: 8
+      - name: Get pnpm store directory
+        shell: bash
         run: |
-          npm install -g pnpm
-          echo "$(pnpm store path --silent)" >> $GITHUB_ENV
-      - name: Cache pnpm modules
-        uses: actions/cache@v3
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+  
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
