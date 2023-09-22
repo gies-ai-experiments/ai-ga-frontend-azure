@@ -4,7 +4,7 @@ module.exports = {
   experimental: {
     serverActions: true,
   },
-  standalone: true,
+  output: 'standalone',
   images: {
     domains: ['localhost'],
   },

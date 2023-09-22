@@ -50,16 +50,18 @@ export function ClearHistory({ clearChats }: ClearHistoryProps) {
             disabled={isPending}
             onClick={event => {
               event.preventDefault()
-              startTransition(async () => {
-                const result = await clearChats()
-
-                if (result && 'error' in result) {
-                  toast.error(result.error)
-                  return
-                }
-
-                setOpen(false)
-                router.push('/')
+              startTransition(() => {
+                (async () => {
+                  const result = await clearChats()
+            
+                  if (result && 'error' in result) {
+                    toast.error(result.error)
+                    return
+                  }
+            
+                  setOpen(false)
+                  router.push('/')
+                })()
               })
             }}
           >
