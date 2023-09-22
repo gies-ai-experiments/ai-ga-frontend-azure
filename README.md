@@ -39,6 +39,45 @@ This will launch the application, where you can interact with it on http://local
 
 Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request.
 
+## Project Structure
+```mermaid
+.
+├── api
+│   ├── auth
+│   │   ├── [...nextauth].ts
+│   │   └── auth.ts
+│   └── actions.ts
+├── app
+│   ├── api
+│   │   └── auth
+│   │       └── [...nextauth]
+│   │           └── route.ts
+│   ├── chat
+│   │   ├── [id]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── share
+│   │   └── [id]
+│   │       └── page.tsx
+│   ├── sign-in
+│   │   └── page.tsx
+│   ├── layout.tsx
+│   └── page.tsx
+├── components
+│   ├── header.tsx
+│   ├── chat-list.tsx
+│   ├── login-button.tsx
+│   └── ...
+├── lib
+│   └── types.ts
+├── public
+│   └── ...
+├── styles
+│   └── globals.css
+├── next.config.js
+├── tsconfig.json
+└── package.json
+```
 ## License 📄
 
 This project is licensed under the MIT License.
