@@ -66,13 +66,13 @@ jobs:
           cp -r .next/standalone/. pnpm-lock.yaml deploy/
           cd deploy
           ls -la
-          zip -r my-nextjs-app.zip *
+          zip -r release.zip *
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: ./deploy/my-nextjs-app.zip
+          path: ./deploy/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -95,6 +95,9 @@ jobs:
 
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
+
+      - name: unzip artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure WebApp'
         id: deploy-to-webapp 
