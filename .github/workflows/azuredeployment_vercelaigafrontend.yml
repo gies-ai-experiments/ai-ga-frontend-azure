@@ -99,6 +99,7 @@ jobs:
       - name: unzip artifact for deployment
         run: |
           unzip release.zip
+          rm -rf release.zip
           pwd
           ls -l
 
