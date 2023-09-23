@@ -48,12 +48,14 @@ jobs:
         run: | 
           pnpm install --no-frozen-lockfile
           pnpm run build
+          ls -la
 
       - name: Prepare deployment package
         run: |
           mkdir deploy
           cp -r .next package.json node_modules deploy/
           cd deploy
+          ls -la
           zip -r my-nextjs-app.zip *
 
       - name: Upload artifact for deployment job
