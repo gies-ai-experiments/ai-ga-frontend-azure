@@ -97,13 +97,6 @@ jobs:
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
 
-      - name: unzip artifact for deployment
-        run: |
-          unzip release.zip
-          rm -rf release.zip
-          pwd
-          ls -l
-
       - name: 'Deploy to Azure WebApp'
         id: deploy-to-webapp 
         uses: azure/webapps-deploy@v2
