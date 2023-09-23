@@ -8,5 +8,4 @@ module.exports = {
   images: {
     domains: ['localhost'],
   },
-  target: 'serverless',
 };
