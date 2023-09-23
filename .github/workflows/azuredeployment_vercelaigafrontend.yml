@@ -59,16 +59,12 @@ jobs:
           pnpm install --no-frozen-lockfile
           pnpm run build
           ls -la
-
+      
       - name: Prepare deployment package
         run: |
-          mkdir deploy
-          cp -r .next/standalone/. pnpm-lock.yaml deploy/
-          echo "Listing all files from .next/standalone copied to create zip:"
+          echo "Listing all files from .next/standalone to create zip:"
           ls -la .next/standalone/
-          ls -la deploy/
-          cd deploy
-          zip -r ../release.zip .
+          zip -r release.zip .next/standalone/ pnpm-lock.yaml
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3.1.3
