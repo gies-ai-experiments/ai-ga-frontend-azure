@@ -67,7 +67,7 @@ jobs:
           echo "Listing all files from .next/standalone copied to create zip:"
           ls -la .next/standalone/
           ls -la deploy/
-          zip -r release.zip deploy/*
+          zip -r release.zip deploy/.
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
