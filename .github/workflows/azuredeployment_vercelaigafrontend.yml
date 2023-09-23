@@ -99,7 +99,7 @@ jobs:
       - name: unzip artifact for deployment
         run: |
           unzip release.zip
-          cwd
+          pwd
           ls -l
 
       - name: 'Deploy to Azure WebApp'
