@@ -52,7 +52,7 @@ jobs:
       - name: Prepare deployment package
         run: |
           mkdir deploy
-          cp -r node_modules package.json .next deploy/
+          cp -r .next/standalone deploy/
           cd deploy
           zip -r my-nextjs-app.zip *
 
