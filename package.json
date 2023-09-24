@@ -2,9 +2,6 @@
   "name": "ai-ga-frontend-azure",
   "version": "0.0.2",
   "private": true,
-  "engines": {
-    "node": "18.17.1"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
