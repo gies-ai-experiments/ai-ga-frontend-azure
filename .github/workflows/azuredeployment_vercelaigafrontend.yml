@@ -62,10 +62,8 @@ jobs:
       
       - name: Prepare deployment package
         run: |
-          echo "Listing all files from .next/standalone to create zip:"
-          ls -la .next/standalone/
-          cd .next/standalone
-          zip -r ../../release.zip .next node_modules package.json server.js pnpm-lock.yaml
+          echo "Listing all files from .next/ to create zip:"
+          zip -r release.zip .next node_modules package.json pnpm-lock.yaml
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3.1.3
