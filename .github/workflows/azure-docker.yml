@@ -4,8 +4,6 @@ on:
   push:
     branches: 
       - docker_deployment
-    
-  workflow_dispatch:
 
 env:
   IMAGE_NAME: ai-ga-frontend-azure
@@ -25,15 +23,17 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+            client-id: ${{ secrets.AIGACONTAINER_AZURE_TENANT_ID }}
+            tenant-id: ${{ secrets.AIGACONTAINER_AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AIGACONTAINER_AZURE_TENANT_ID }}
 
       - name: Build and push Docker image
         uses: azure/container-apps-deploy-action@v1
         with:
           appSourcePath: ${{ github.workspace }}
           registryUrl: ${{ env.REGISTRY_NAME }}
-          registryUsername: ${{ secrets.AZURE_USERNAME }}
-          registryPassword: ${{ secrets.AZURE_PASSWORD }}
+          registryUsername: ${{ secrets.AIGACONTAINER_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.AIGACONTAINER_REGISTRY_PASSWORD }}
           containerAppName: ${{ env.APP_NAME }}
           resourceGroup: ${{ env.RESOURCE_GROUP }}
           imageToBuild: ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
