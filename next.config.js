@@ -7,4 +7,6 @@ module.exports = {
   images: {
     domains: ['localhost'],
   },
+  output: "standalone",
+  
 };
