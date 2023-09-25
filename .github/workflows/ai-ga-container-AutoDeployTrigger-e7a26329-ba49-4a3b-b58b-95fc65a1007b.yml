@@ -1,0 +1,45 @@
+name: Trigger auto deployment for ai-ga-container
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ docker_deployment ]
+    paths:
+    - '//**'
+    - '.github/workflows/ai-ga-container-AutoDeployTrigger-e7a26329-ba49-4a3b-b58b-95fc65a1007b.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AIGACONTAINER_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AIGACONTAINER_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AIGACONTAINER_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: aigaregistry.azurecr.io
+          registryUsername: ${{ secrets.AIGACONTAINER_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.AIGACONTAINER_REGISTRY_PASSWORD }}
+          containerAppName: ai-ga-container
+          resourceGroup: ai-ga-frontend-rg
+          imageToBuild: aigaregistry.azurecr.io/ai-ga-container:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+
