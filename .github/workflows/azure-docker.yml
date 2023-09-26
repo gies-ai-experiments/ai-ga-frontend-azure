@@ -20,6 +20,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Check Azure CLI version
+        run: az --version
+
       - name: Azure Login
         uses: azure/login@v1
         with:
