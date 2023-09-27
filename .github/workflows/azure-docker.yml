@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: ai-ga-frontend-azure
-  REGISTRY_NAME: aigaregistry
+  REGISTRY_NAME: aigaregistry.azurecr.io
   APP_NAME: ai-ga-container
   RESOURCE_GROUP: ai-ga-frontend-rg
   LOCATION: eastus2
