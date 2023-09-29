@@ -50,7 +50,7 @@ COPY --chown=app:app --from=builder /app/.next/static src/.next/static
 # You should choose a port that is supported by your cloud provider
 ENV PORT 3000
 # Expose the port to the outside world
-EXPOSE 80
+EXPOSE 3000
 
 # Finally, we run the NextJS app
 CMD ["node", "src/server.js"]
