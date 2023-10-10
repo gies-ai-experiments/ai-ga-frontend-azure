@@ -33,7 +33,7 @@ jobs:
         uses: azure/container-apps-deploy-action@v1
         with:
           appSourcePath: ${{ github.workspace }}
-          registryUrl: ${{ env.REGISTRY_NAME }}
+          registryUrl: ${{ secrets.AIGACONTAINER_REGISTRY_ENDPOINT }}
           registryUsername: ${{ secrets.AIGACONTAINER_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.AIGACONTAINER_REGISTRY_PASSWORD }}
           containerAppName: ${{ env.APP_NAME }}
