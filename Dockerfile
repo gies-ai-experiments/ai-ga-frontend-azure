@@ -26,10 +26,6 @@ RUN pnpm fetch
 # STAGE 3: Copy the application code and install all deps from cache into the application
 FROM fetched_deps as with_all_deps
 
-# Copy the .env.local file
-COPY .env.local ./
- 
-
 # Copy the whole project code (except for ignored things)
 COPY . .
 
