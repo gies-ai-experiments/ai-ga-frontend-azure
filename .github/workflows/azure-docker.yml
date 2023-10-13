@@ -42,9 +42,10 @@ jobs:
           dockerfilePath: Dockerfile
 
       - name: Set up Docker Compose
-        uses: docker/compose-cli@v0
-        with:
-          version: '1.29.2'
+        run: |
+          curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64 -o docker-compose
+          chmod +x docker-compose
+          sudo mv docker-compose /usr/local/bin/
 
       - name: Build and run Docker Compose
         run: |
