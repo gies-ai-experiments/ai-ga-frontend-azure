@@ -39,7 +39,7 @@ jobs:
           containerAppName: ${{ env.APP_NAME }}
           resourceGroup: ${{ env.RESOURCE_GROUP }}
           imageToBuild: ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          dockerfilePath: Dockerfile
+          dockerfilePath: ./Dockerfile
 
       - name: Set up Docker Compose
         run: |
