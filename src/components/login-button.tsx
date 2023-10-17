@@ -34,7 +34,7 @@ export function LoginButton({
       {isLoading ? (
         <IconSpinner className="mr-2 animate-spin" />
       ) : showMicrosoftIcon ? (
-        <IconMicrosoft className="mr-2" /> // You might want to replace this with a Microsoft or Azure AD icon
+        <IconMicrosoft className="mr-2" />
       ) : null}
       {text}
     </Button>

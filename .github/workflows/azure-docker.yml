@@ -1,0 +1,52 @@
+name: Build and Deploy to Azure Container Apps
+
+on:
+  push:
+    branches: 
+      - docker_deployment
+
+env:
+  IMAGE_NAME: ai-ga-frontend-azure
+  REGISTRY_NAME: aigaregistry.azurecr.io
+  APP_NAME: ai-ga-container
+  RESOURCE_GROUP: ai-ga-frontend-rg
+  WEBSITES_PORT: '3000'
+  LOCATION: eastus2
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Azure CLI version
+        run: az --version
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Build and push Docker image
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}
+          registryUrl: ${{ secrets.AIGACONTAINER_REGISTRY_ENDPOINT }}
+          registryUsername: ${{ secrets.AIGACONTAINER_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.AIGACONTAINER_REGISTRY_PASSWORD }}
+          containerAppName: ${{ env.APP_NAME }}
+          resourceGroup: ${{ env.RESOURCE_GROUP }}
+          imageToBuild: ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          dockerfilePath: ./Dockerfile
+
+      - name: Set up Docker Compose
+        run: |
+          curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64 -o docker-compose
+          chmod +x docker-compose
+          sudo mv docker-compose /usr/local/bin/
+
+      - name: Build and run Docker Compose
+        run: |
+          docker-compose up -d
