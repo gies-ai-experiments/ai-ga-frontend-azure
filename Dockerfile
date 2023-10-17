@@ -55,7 +55,7 @@ USER app
 
 # We copy the built NextJS app assets from the builder stage
 COPY --chown=app:app --from=builder /app/.next/standalone src/
-COPY --chown=app:app --from=builder /app/src/public src/public
+COPY --chown=app:app --from=builder /app/public src/public
 COPY --chown=app:app --from=builder /app/.next/static src/.next/static
 
 
